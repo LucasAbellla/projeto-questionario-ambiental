@@ -1,0 +1,38 @@
+ID_PERGUNTA,TOPICO,PERGUNTA_TEXTO,TIPO_RESPOSTA,OPCOES_RESPOSTA,GATILHO,VAI_PARA_ID,DEPENDÊNCIA,PESO_RISCO,TEXTO_LAUDO
+Q1,geral,A atividade industrial da sua empresa está licenciada?,S / N,,Não,Q2,,10,Toda atividade potencialmente poluidora é sujeita ao licenciamento ambiental. Consulte a legislação indicada para seu município para verificar os casos de isenção de licenciamento ambiental.
+Q2,geral,A atividade da sua empresa é o CNAE principal que consta no cartão de CNPJ?,S / N,,Não,Q3,,9,
+Q3,geral,Todas as atividades desenvolvidas no processo da sua empresa constam listadas no CNAE do cartão CNPJ?,S / N,,Não,Q4,,9,
+Q4,geral,A atividade industrial desenvolvida pela empresa indicada no alvará de funcionamento municipal é a mesma indicada na licença ambiental de operação?,S / N,,Não,Q5,,10,
+Q5,geral,A localização da sua atividade é urbana ou rural?,,urbana / rural,,Q6,,1,
+Q6,geral,O zoneamento ambiental emitido pela municipalidade para o endereço onde a sua empresa está instalada permite a atividade potencialmente poluidora que é executada?,S / N,,Não,Q7,,10,"A atividade deve ser desenvolvida em locais onde o zoneamento municipal permite. Caso desconheça o zoneamento do seu endereço, faça uma consulta a Secretaria Municipal do seu Município"
+Q7,geral,A atividade industrial possui alvará de bombeiros vigente?,S / N,,Não,Q7.1,responder S no Q7,10,Possuir um alvará de bombeiros valido e adequado as atividades realizadas no local é uma obrigação.
+Q7.1,geral,O tipo de atividade descrito no alvará de bombeiros é igual a atividade industrial que consta na licença ambiental e cadastros?,S / N,,Não,Q7.2,,9,
+Q7.2,geral,A metragem total de área que consta no alvará de bombeiros é igual a metragem que consta na licença ambiental e nos cadastros da empresa?,S / N,,Não,Q8,responder S no Q7,7,"É recomendado que as metragens e processos sejam igualmente descritos e indicados em todos os registros, licenças e alvarás"
+Q8,água e efluentes,"O abastecimento de água da empresa é por concessionária, poço artesiano (8.1), poço comunitário(8.1) ou água superficial?",,"poço artesiano (8.1), poço comunitário(8.1) ou água superficial",Não,Q8.1,,1,
+Q8.1,água e efluentes,Tem outroga ou autorização de captação da água válida? ,S / N,,Não,Q8.1.1,,9,É proibida a captação de águas sem a respectiva autorização
+Q8.1.1,água e efluentes,A vazão da outorga corresponde ao volume captado diariamente?,S / N,,Não,Q8.1.2,,9,Captar água em vazão superior ao limite estabelecido é uma infração ambiental
+Q8.1.2,água e efluentes,É feito tratamento de água para consumo humano?,S / N,,Não,Q8.1.3,Responder S no Q8,10,
+Q8.1.3,água e efluentes,Tem responsável técnico pelo tratamento da água para consumo humano?,S / N,,Não,Q8.2,Responder S no Q8.1.2,9,
+Q8.2,água e efluentes,Tem laudo de análise laboratorial da qualidade de água para consumo humano considerando como referência as normativas vigentes da ANVISA para potabilidade?,S / N,,Não,Q9,,10,A forma de evidenciar que a qualidade da água fornecida aos colaboradores da empresa é potável se dá através de laudos de análise laboratorial
+Q9,água e efluentes,Faz limpeza da caixa d'água ao menos 1 vez por ano?,S / N,,Não,Q9.1,,9,A limpeza das caixas d'água é uma obrigação e visa auxiliar na preservação da qualidade da água
+Q9.1,água e efluentes,Tem laudo com notação de responsabilidade técnica para cada limpeza de caixa d'água realizada?,S / N,,Não,Q10,Responder S no Q9,9,
+Q10,geral,"O número de funcionários existente na empresa, inclusive terceiros fixos que trabalham regularmente dentro das instalações confere com o numero de funcionários informados no processo de licenciamento ambiental?",S / N,,Não,Q11,,7,
+Q11,geral,A produção da empresa confere com a quantidade e tipo de produtos listados na licença ambiental?,S / N,,Não,Q12,,8,"É responsabilidade da empresa prestar informações aos órgãos fiscalizadores e, em caso de vistoria, se forem constatadas divergências, o empreendedor poderá ser autuado"
+Q12,geral,"A listagem de equipamentos e capacidade produtiva indicada no processo de licenciamento ambiental confere com a realidade da sua atividade hoje? Equipamentos, capacidade instalada, processos",S / N,,Não,Q13,,7,
+Q13,químicos,A atividade utiliza produtos químicos e perigosos?,S / N,,Não,Q13.1,,1,
+Q13.1,químicos,É feito controle de todos os tipos de produtos químicos e perigosos usados na empresa?,S / N,,Não,Q13.2,Responder S no Q13,9,"Os produtos químicos e perigosos podem resultar em impactos ao meio ambiente a às pessoas. Medidas de proteção devem ser adotadas no manuseio, armazenagem e eventual fracionamento."
+Q13.2,químicos,Empresa possui a ficha técnica (Ficha de Dados de Segurança - FDS) de todos os produtos químicos e perigosos usados no seu processo industrial e manutenção?,S / N,,Não,Q13.1.1,Responder S no Q13,9,
+Q13.1.1,químicos,Foi feita tabela de compatibilidade dos produtos químicos e perigosos armazenados na empresa para evitar reações ou manuseio incorreto?,S / N,,Não,Q13.3,Responder S no Q13,8,Conhecer e mapear eventuais incompatibilidades entre produtos e resíduos evita acidentes e/ou reações adversas.
+Q13.3,químicos,O local onde são guardados os produtos químicos e perigosos é sinalizado?,S / N,,Não,Q14,Responder S no Q13,8,
+Q14,químicos,Na sua empresa é permitido fumar?,S / N,,Não,Q15,,6,Verifique se no seu Estado ou Município existe legislação específica que indique a proibição de fumar em locais fechados ou ambientes de trabalho
+Q15,resíduos ,É feita a segregação dos resíduos gerados na empresa?,S / N,,Não,Q16,,10,
+Q16,resíduos ,A empresa possui Plano de Gerenciamento de Resíduos (PGRS ou PGRSI)?,S / N,,Não,Q16.1,,9,É uma obrigação estabelecida na Política Nacional de Resíduos Sólidos possuir um Plano de Gerenciamento de Resíduos atualizado e com responsável técnico
+Q16.1,resíduos ,O Plano de Gerenciamento de Resíduos da sua empresa está válido? Considerar 12 meses da data da emissão do documento,S / N,,Não,Q16.2,,9,
+Q16.2,resíduos ,"Sua empresa mantém responsável técnico pela emissão e manutenção do Plano de Gerenciamento de Resíduos com anotação de responsabilidade técnica (ART, AFT,..) em vigor ",S / N,,Não,Q17,,9,É uma obrigação estabelecida na Política Nacional de Resíduos Sólidos possuir um Plano de Gerenciamento de Resíduos atualizado e com responsável técnico
+Q17,resíduos ,São emitidos MTRs (Movimento de Transporte de Resíduo) para todo o transporte e destinação de resíduos realizados?,S / N,,Não,Q18,,10,Toda movimentação de resíduos industriais deve ser feita acompanhada do MTR correspondente.
+Q18,efluentes,Os efluentes sanitários (esgoto) gerado na empresa está sendo tratado?,S / N,,Não,Q18.1,,,
+Q18.1,efluentes,Quem faz o tratamento dos esgotos gerados pela empresa? ,,( )ela mesma Q18.2; ( )concessionária pública; ( ) terceiro contratado Q18.2,Não,Q18.2,,,
+Q18.2,efluentes,A empresa faz controle da qualidade dos efluentes após o tratamento?,S / N,,Não,Q18.3,,,
+Q18.3,efluentes,O lançamento dos efluentes sanitários é feito onde?,,( ) rede coletora pública; ( ) corpo hídrico; ( ) solo; ( )reutilizado,Não,Q19,,,
+Q19,efluentes,A atividade industrial realizada e na limpeza da fábrica são gerados efluentes industriais?,S / N,,Não,Q19.1,,,
+Q19.1,efluentes,Os efluentes industriais gerados na empresa estão sendo tratados?,S / N,,,,,,

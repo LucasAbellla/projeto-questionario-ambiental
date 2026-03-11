@@ -1,0 +1,470 @@
+[
+  {
+    "id": "Q1",
+    "topic": "geral",
+    "text": "A atividade industrial da sua empresa está licenciada?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q2",
+    "riskWeight": 10,
+    "reportText": "Toda atividade potencialmente poluidora é sujeita ao licenciamento ambiental. Consulte a legislação indicada para seu município para verificar os casos de isenção de licenciamento ambiental."
+  },
+  {
+    "id": "Q2",
+    "topic": "geral",
+    "text": "A atividade da sua empresa é o CNAE principal que consta no cartão de CNPJ?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q3",
+    "riskWeight": 9,
+    "reportText": ""
+  },
+  {
+    "id": "Q3",
+    "topic": "geral",
+    "text": "Todas as atividades desenvolvidas no processo da sua empresa constam listadas no CNAE do cartão CNPJ?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q4",
+    "riskWeight": 9,
+    "reportText": ""
+  },
+  {
+    "id": "Q4",
+    "topic": "geral",
+    "text": "A atividade industrial desenvolvida pela empresa indicada no alvará de funcionamento municipal é a mesma indicada na licença ambiental de operação?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q5",
+    "riskWeight": 10,
+    "reportText": ""
+  },
+  {
+    "id": "Q5",
+    "topic": "geral",
+    "text": "A localização da sua atividade é urbana ou rural?",
+    "responseType": "Múltipla Escolha",
+    "options": [
+      {
+        "text": "urbana",
+        "nextId": "Q6"
+      },
+      {
+        "text": "rural",
+        "nextId": "Q6"
+      }
+    ],
+    "trigger": "",
+    "nextId": "Q6",
+    "riskWeight": 1,
+    "reportText": ""
+  },
+  {
+    "id": "Q6",
+    "topic": "geral",
+    "text": "O zoneamento ambiental emitido pela municipalidade para o endereço onde a sua empresa está instalada permite a atividade potencialmente poluidora que é executada?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q7",
+    "riskWeight": 10,
+    "reportText": "A atividade deve ser desenvolvida em locais onde o zoneamento municipal permite. Caso desconheça o zoneamento do seu endereço, faça uma consulta a Secretaria Municipal do seu Município"
+  },
+  {
+    "id": "Q7",
+    "topic": "geral",
+    "text": "A atividade industrial possui alvará de bombeiros vigente?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q7.1",
+    "riskWeight": 10,
+    "reportText": "Possuir um alvará de bombeiros valido e adequado as atividades realizadas no local é uma obrigação."
+  },
+  {
+    "id": "Q7.1",
+    "topic": "geral",
+    "text": "O tipo de atividade descrito no alvará de bombeiros é igual a atividade industrial que consta na licença ambiental e cadastros?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q7.2",
+    "riskWeight": 9,
+    "reportText": ""
+  },
+  {
+    "id": "Q7.2",
+    "topic": "geral",
+    "text": "A metragem total de área que consta no alvará de bombeiros é igual a metragem que consta na licença ambiental e nos cadastros da empresa?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q8",
+    "riskWeight": 7,
+    "reportText": "É recomendado que as metragens e processos sejam igualmente descritos e indicados em todos os registros, licenças e alvarás"
+  },
+  {
+    "id": "Q8",
+    "topic": "Geral",
+    "text": "Qual a fonte de abastecimento de água da empresa?",
+    "responseType": "Múltipla Escolha",
+    "options": [
+      {
+        "text": "Poço artesiano",
+        "nextId": "Q8.1"
+      },
+      {
+        "text": "Poço comunitário",
+        "nextId": "Q8.1"
+      },
+      {
+        "text": "Água superficial",
+        "nextId": "Q8.2"
+      }
+    ],
+    "trigger": "Não",
+    "nextId": "FIM",
+    "riskWeight": 0,
+    "reportText": ""
+  },
+  {
+    "id": "Q8.1",
+    "topic": "água e efluentes",
+    "text": "Tem outroga ou autorização de captação da água válida?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q8.1.1",
+    "riskWeight": 9,
+    "reportText": "É proibida a captação de águas sem a respectiva autorização"
+  },
+  {
+    "id": "Q8.1.1",
+    "topic": "água e efluentes",
+    "text": "A vazão da outorga corresponde ao volume captado diariamente?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q8.1.2",
+    "riskWeight": 9,
+    "reportText": "Captar água em vazão superior ao limite estabelecido é uma infração ambiental"
+  },
+  {
+    "id": "Q8.1.2",
+    "topic": "água e efluentes",
+    "text": "É feito tratamento de água para consumo humano?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q8.1.3",
+    "riskWeight": 10,
+    "reportText": ""
+  },
+  {
+    "id": "Q8.1.3",
+    "topic": "água e efluentes",
+    "text": "Tem responsável técnico pelo tratamento da água para consumo humano?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q8.2",
+    "riskWeight": 9,
+    "reportText": ""
+  },
+  {
+    "id": "Q8.2",
+    "topic": "água e efluentes",
+    "text": "Tem laudo de análise laboratorial da qualidade de água para consumo humano considerando como referência as normativas vigentes da ANVISA para potabilidade?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q9",
+    "riskWeight": 10,
+    "reportText": "A forma de evidenciar que a qualidade da água fornecida aos colaboradores da empresa é potável se dá através de laudos de análise laboratorial"
+  },
+  {
+    "id": "Q9",
+    "topic": "água e efluentes",
+    "text": "Faz limpeza da caixa d'água ao menos 1 vez por ano?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q9.1",
+    "riskWeight": 9,
+    "reportText": "A limpeza das caixas d'água é uma obrigação e visa auxiliar na preservação da qualidade da água"
+  },
+  {
+    "id": "Q9.1",
+    "topic": "água e efluentes",
+    "text": "Tem laudo com notação de responsabilidade técnica para cada limpeza de caixa d'água realizada?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q10",
+    "riskWeight": 9,
+    "reportText": ""
+  },
+  {
+    "id": "Q10",
+    "topic": "geral",
+    "text": "O número de funcionários existente na empresa, inclusive terceiros fixos que trabalham regularmente dentro das instalações confere com o numero de funcionários informados no processo de licenciamento ambiental?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q11",
+    "riskWeight": 7,
+    "reportText": ""
+  },
+  {
+    "id": "Q11",
+    "topic": "geral",
+    "text": "A produção da empresa confere com a quantidade e tipo de produtos listados na licença ambiental?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q12",
+    "riskWeight": 8,
+    "reportText": "É responsabilidade da empresa prestar informações aos órgãos fiscalizadores e, em caso de vistoria, se forem constatadas divergências, o empreendedor poderá ser autuado"
+  },
+  {
+    "id": "Q12",
+    "topic": "geral",
+    "text": "A listagem de equipamentos e capacidade produtiva indicada no processo de licenciamento ambiental confere com a realidade da sua atividade hoje? Equipamentos, capacidade instalada, processos",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q13",
+    "riskWeight": 7,
+    "reportText": ""
+  },
+  {
+    "id": "Q13",
+    "topic": "químicos",
+    "text": "A atividade utiliza produtos químicos e perigosos?",
+    "responseType": "Sim/Não",
+    "options": [
+      { "text": "Sim", "nextId": "Q13.1" },
+      { "text": "Não", "nextId": "Q14" }
+    ],
+    "trigger": "Sim",
+    "nextId": "Q13.1",
+    "riskWeight": 0,
+    "reportText": ""
+  },
+  {
+    "id": "Q13.1",
+    "topic": "químicos",
+    "text": "É feito controle de todos os tipos de produtos químicos e perigosos usados na empresa?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q13.2",
+    "riskWeight": 9,
+    "reportText": "Os produtos químicos e perigosos podem resultar em impactos ao meio ambiente e às pessoas. Medidas de proteção devem ser adotadas no manuseio, armazenagem e eventual fracionamento."
+  },
+  {
+    "id": "Q13.2",
+    "topic": "químicos",
+    "text": "Empresa possui a ficha técnica (Ficha de Dados de Segurança - FDS) de todos os produtos químicos e perigosos usados no seu processo industrial e manutenção?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q13.1.1",
+    "riskWeight": 9,
+    "reportText": ""
+  },
+  {
+    "id": "Q13.1.1",
+    "topic": "químicos",
+    "text": "Foi feita tabela de compatibilidade dos produtos químicos e perigosos armazenados na empresa para evitar reações ou manuseio incorreto?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q13.3",
+    "riskWeight": 8,
+    "reportText": "Conhecer e mapear eventuais incompatibilidades entre produtos e resíduos evita acidentes e/ou reações adversas."
+  },
+  {
+    "id": "Q13.3",
+    "topic": "químicos",
+    "text": "O local onde são guardados os produtos químicos e perigosos é sinalizado?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q14",
+    "riskWeight": 8,
+    "reportText": ""
+  },
+  {
+    "id": "Q14",
+    "topic": "geral",
+    "text": "Na sua empresa é permitido fumar?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Sim",
+    "nextId": "Q15",
+    "riskWeight": 6,
+    "reportText": "Verifique se no seu Estado ou Município existe legislação específica que indique a proibição de fumar em locais fechados ou ambientes de trabalho."
+  },
+  {
+    "id": "Q15",
+    "topic": "resíduos",
+    "text": "É feita a segregação dos resíduos gerados na empresa?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q16",
+    "riskWeight": 10,
+    "reportText": ""
+  },
+  {
+    "id": "Q16",
+    "topic": "resíduos",
+    "text": "A empresa possui Plano de Gerenciamento de Resíduos (PGRS ou PGRSI)?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q16.1",
+    "riskWeight": 9,
+    "reportText": "É uma obrigação estabelecida na Política Nacional de Resíduos Sólidos possuir um Plano de Gerenciamento de Resíduos atualizado e com responsável técnico"
+  },
+  {
+    "id": "Q16.1",
+    "topic": "resíduos",
+    "text": "O Plano de Gerenciamento de Resíduos da sua empresa está válido? Considerar 12 meses da data da emissão do documento",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q16.2",
+    "riskWeight": 9,
+    "reportText": ""
+  },
+  {
+    "id": "Q16.2",
+    "topic": "resíduos",
+    "text": "Sua empresa mantém responsável técnico pela emissão e manutenção do Plano de Gerenciamento de Resíduos com anotação de responsabilidade técnica (ART, AFT,..) em vigor",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q17",
+    "riskWeight": 9,
+    "reportText": "É uma obrigação estabelecida na Política Nacional de Resíduos Sólidos possuir um Plano de Gerenciamento de Resíduos atualizado e com responsável técnico"
+  },
+  {
+    "id": "Q17",
+    "topic": "resíduos",
+    "text": "São emitidos MTRs (Movimento de Transporte de Resíduo) para todo o transporte e destinação de resíduos realizados?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q18",
+    "riskWeight": 10,
+    "reportText": "Toda movimentação de resíduos industriais deve ser feita acompanhada do MTR correspondente."
+  },
+  {
+    "id": "Q18",
+    "topic": "efluentes",
+    "text": "Os efluentes sanitários (esgoto) gerado na empresa está sendo tratado?",
+    "responseType": "Sim/Não",
+    "options": [
+      { "text": "Sim", "nextId": "Q18.1" },
+      { "text": "Não", "nextId": "Q19" }
+    ],
+    "trigger": "Não",
+    "nextId": "Q18.1",
+    "riskWeight": 0,
+    "reportText": ""
+  },
+  {
+    "id": "Q18.1",
+    "topic": "Efluentes",
+    "text": "Quem faz o tratamento dos esgotos gerados pela empresa?",
+    "responseType": "Múltipla Escolha",
+    "options": [
+      {
+        "text": "Ela mesma",
+        "nextId": "Q18.2"
+      },
+      {
+        "text": "Concessionária pública",
+        "nextId": "Q19"
+      },
+      {
+        "text": "Terceiro contratado",
+        "nextId": "Q18.2"
+      }
+    ],
+    "trigger": "Não",
+    "nextId": "FIM",
+    "riskWeight": 0,
+    "reportText": ""
+  },
+  {
+    "id": "Q18.2",
+    "topic": "efluentes",
+    "text": "A empresa faz controle da qualidade dos efluentes após o tratamento?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "Não",
+    "nextId": "Q18.3",
+    "riskWeight": 0,
+    "reportText": ""
+  },
+  {
+    "id": "Q18.3",
+    "topic": "Efluentes",
+    "text": "O lançamento dos efluentes sanitários é feito onde?",
+    "responseType": "Múltipla Escolha",
+    "options": [
+      {
+        "text": "rede coletora pública",
+        "nextId": "FIM"
+      },
+      {
+        "text": "corpo hídrico",
+        "nextId": "FIM"
+      },
+      {
+        "text": "solo",
+        "nextId": "FIM"
+      },
+      {
+        "text": "reutilizado",
+        "nextId": "FIM"
+      }
+    ],
+    "trigger": "solo",
+    "nextId": "FIM",
+    "riskWeight": 10,
+    "reportText": "Efluente lançado no solo apresenta alto risco de contaminação e precisa de adequação urgente."
+  },
+  {
+    "id": "Q19",
+    "topic": "efluentes",
+    "text": "A atividade industrial realizada e na limpeza da fábrica são gerados efluentes industriais?",
+    "responseType": "Sim/Não",
+    "options": [
+      { "text": "Sim", "nextId": "Q19.1" },
+      { "text": "Não", "nextId": "FIM" }
+    ],
+    "trigger": "Sim",
+    "nextId": "Q19.1",
+    "riskWeight": 0,
+    "reportText": ""
+  },
+  {
+    "id": "Q19.1",
+    "topic": "efluentes",
+    "text": "Os efluentes industriais gerados na empresa estão sendo tratados?",
+    "responseType": "Sim/Não",
+    "options": [],
+    "trigger": "",
+    "nextId": "FIM",
+    "riskWeight": 0,
+    "reportText": ""
+  }
+]
