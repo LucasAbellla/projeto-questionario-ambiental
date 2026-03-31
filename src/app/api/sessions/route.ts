@@ -1,21 +1,24 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '../../../lib/supabase'; // A ponte do Supabase que criaste
+import { supabase } from '../../../lib/supabase'; 
 import { Resend } from 'resend';
 
-// Inicializa o motor de e-mails com a tua chave secreta
-const resend = new Resend(process.env.RESEND_API_KEY);
+// 1. TRUQUE MÁGICO PARA A VERCEL: Obriga o Next.js a tratar esta rota de forma dinâmica, ignorando-a no 'build'
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   try {
-    // 1. Recebe os dados enviados pelo formulário
+    // 2. MUDANÇA: O Resend agora só é inicializado AQUI DENTRO, no momento exato em que o formulário é enviado
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // Recebe os dados enviados pelo formulário
     const body = await request.json();
     const { name, document, email } = body;
 
-    // 2. Calcula a data de validade (ex: 7 dias a partir de agora)
+    // Calcula a data de validade (7 dias)
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 7);
 
-    // 3. Guarda na base de dados (Supabase)
+    // Guarda na base de dados (Supabase)
     const { data, error } = await supabase
       .from('sessions')
       .insert([
@@ -37,13 +40,13 @@ export async function POST(request: Request) {
 
     const sessionId = data.id;
 
-    // Cria o link único. No futuro, mudamos o localhost para o link da Vercel.
+    // Cria o link único usando a variável da Vercel
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     const magicLink = `${baseUrl}/t/${sessionId}`;
 
-    // 4. Envia o e-mail através do Resend
+    // Envia o e-mail através do Resend
     await resend.emails.send({
-      from: 'EnvCheck <onboarding@resend.dev>', // O Resend usa este e-mail para testes
+      from: 'Diagnóstico Ambiental <nao-responda@conformidade.eco.br>',
       to: email,
       subject: 'O seu acesso ao Diagnóstico Ambiental - EnvCheck',
       html: `
@@ -61,7 +64,6 @@ export async function POST(request: Request) {
       `
     });
 
-    // 5. Devolve uma resposta de sucesso ao formulário
     return NextResponse.json({ success: true, sessionId });
 
   } catch (error) {
