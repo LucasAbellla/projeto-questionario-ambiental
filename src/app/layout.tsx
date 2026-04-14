@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "EnvCheck | Diagnóstico Ambiental",
+  title: "Conformidades",
   description: "Sistema inteligente de auditoria e conformidade ambiental para empresas.",
   icons: {
     icon: "https://cdn-icons-png.flaticon.com/512/2923/2923058.png", // Ícone de folha verde provisório
