@@ -69,7 +69,7 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
         <div className="bg-emerald-500/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
           <ShieldCheck className="text-emerald-500 w-10 h-10" />
         </div>
-        <h2 className="text-3xl font-bold text-white mb-4">Bem-vindo ao EnvCheck</h2>
+        <h2 className="text-3xl font-bold text-white mb-4">Bem-vindo ao Questionário de Avaliação de Conformidade Ambiental</h2>
         <p className="text-slate-400 text-lg leading-relaxed mb-8">
           Este sistema foi desenvolvido para realizar um diagnóstico de conformidade legal ambiental 
           com base na legislação federal brasileira. Antes de começarmos, precisamos de alguns dados 

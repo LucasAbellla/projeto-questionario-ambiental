@@ -16,7 +16,7 @@ export default function AmbientalPage() {
             <Leaf className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
           </div>
           <div>
-            <h1 className="text-xl font-bold tracking-wide">EnvCheck</h1>
+            <h1 className="text-xl font-bold tracking-wide">Conformidades</h1>
             <p className="text-emerald-100 dark:text-emerald-200 text-xs uppercase tracking-widest">Portal de Acesso Ambiental</p>
           </div>
         </div>
