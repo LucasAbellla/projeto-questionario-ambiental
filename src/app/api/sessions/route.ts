@@ -44,7 +44,7 @@ export async function POST(request: Request) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
     const magicLink = `${baseUrl}/t/${sessionId}`;
 
-    // Envia o e-mail através do Resend
+    // Envia o e-mail através do Resend (TEXTOS ATUALIZADOS A PEDIDO DA YUDI)
     await resend.emails.send({
       from: 'Avaliação Ambiental <nao-responda@conformidade.eco.br>',
       to: email,
@@ -52,14 +52,17 @@ export async function POST(request: Request) {
       html: `
         <div style="font-family: sans-serif; max-w: 600px; margin: 0 auto; color: #333;">
           <h2 style="color: #047857;">Olá, ${name}!</h2>
-          <p>O seu ambiente para a <strong>Avaliação de Conformidade Ambiental</strong> está pronto e seguro.</p>
-          <p>Para ler as instruções e iniciar o preenchimento, clique no botão abaixo. Por motivos de segurança, <strong>este link exclusivo irá expirar em 7 dias</strong>.</p>
-          <a href="${magicLink}" style="display: inline-block; background-color: #059669; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 20px;">
+          <p>O seu questionário para a Avaliação de Conformidade Ambiental está disponível.</p>
+          <p>Para iniciar o preenchimento, clique no botão abaixo.</p>
+          <p>Por motivos de segurança, este link é exclusivo e expirará em 7 dias a contar de hoje.</p>
+          
+          <a href="${magicLink}" style="display: inline-block; background-color: #059669; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 20px; margin-bottom: 20px;">
             Acessar o Questionário
           </a>
-          <p style="margin-top: 30px; font-size: 12px; color: #666;">
-            Aviso legal: O relatório final será enviado exclusivamente para este e-mail. Após a emissão, o formulário será bloqueado.
-          </p>
+          
+          <div style="margin-top: 30px; padding: 15px; background-color: #f8fafc; border-left: 4px solid #f59e0b; font-size: 13px; color: #475569; line-height: 1.5;">
+            <strong>Aviso:</strong> ao concluir o formulário será gerado um resumo da avaliação que pode ser impressa e também será enviada para o email informado. Após a conclusão da avaliação o formulário será bloqueado.
+          </div>
         </div>
       `
     });

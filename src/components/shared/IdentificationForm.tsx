@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, FileText, Mail, ShieldCheck, Loader2 } from 'lucide-react';
+import { User, FileText, Mail, ShieldCheck, Loader2, AlertTriangle } from 'lucide-react';
 
 interface IdentificationFormProps {
   onComplete: (data: { name: string; document: string; email: string }) => void;
@@ -11,11 +11,6 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleNext = () => setStep(step + 1);
-
-  const handleSubmitForm = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleNext();
-  };
 
   // Máscara Inteligente para CPF / CNPJ
   const formatDocument = (value: string) => {
@@ -37,8 +32,9 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
       .replace(/(\d{4})(\d{1,2})/, '$1-$2');
   };
 
-  // Integração com API (Supabase + Resend)
-  const handleAgreeAndStart = async () => {
+  // Integração com API (Supabase + Resend) - Movido para o Passo 2
+  const handleSubmitForm = async (e: React.FormEvent) => {
+    e.preventDefault();
     setIsSubmitting(true);
     
     try {
@@ -49,7 +45,7 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
       });
 
       if (response.ok) {
-        setStep(4); // Vai para a tela de Sucesso
+        setStep(3); // Vai direto para a tela de Sucesso (antigo passo 4)
       } else {
         const errorData = await response.json();
         alert(`Erro: ${errorData.error || 'Não foi possível gerar a sessão.'}`);
@@ -65,8 +61,8 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
   // Passo 1: Boas-vindas
   if (step === 1) {
     return (
-      <div className="max-w-2xl mx-auto bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl">
-        <div className="bg-emerald-500/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+      <div className="max-w-2xl mx-auto bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-center">
+        <div className="bg-emerald-500/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
           <ShieldCheck className="text-emerald-500 w-10 h-10" />
         </div>
         <h2 className="text-3xl font-bold text-white mb-4">Bem-vindo ao Questionário de Avaliação de Conformidade Ambiental</h2>
@@ -77,9 +73,9 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
         </p>
         <button 
           onClick={handleNext}
-          className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition-all"
+          className="w-full sm:w-auto px-12 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition-all uppercase tracking-wide"
         >
-          Começar Identificação
+          COMEÇAR A IDENTIFICAÇÃO
         </button>
       </div>
     );
@@ -125,7 +121,9 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-400 mb-2">E-mail para Envio</label>
+              <label className="block text-sm font-medium text-slate-400 mb-2">
+                E-mail para Envio <span className="text-emerald-500">* (inserir email válido)</span>
+              </label>
               <div className="relative">
                 <Mail className="absolute left-4 top-3.5 text-slate-500 w-5 h-5" />
                 <input 
@@ -142,62 +140,53 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
         </div>
 
         <div className="bg-slate-950/50 p-4 rounded-xl border border-slate-800 mb-8">
-          <p className="text-xs text-slate-500 leading-relaxed">
-            Ao continuar, você declara estar ciente de que as informações fornecidas são de sua responsabilidade 
-            e que o relatório final será enviado exclusivamente para o e-mail cadastrado acima.
+          <p className="text-xs text-slate-400 leading-relaxed text-justify">
+            <strong className="text-white">Aviso de Responsabilidade:</strong> Ao continuar, você declara estar ciente de que as informações fornecidas são de sua responsabilidade e que o link do questionário final será encaminhado apenas para o endereço de email informado. Certifique-se de que o email informado está correto.
           </p>
         </div>
 
         <button 
           type="submit"
-          className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition-all"
-        >
-          Confirmar e Ir para Isenções Legais
-        </button>
-      </form>
-    );
-  }
-
-  // Passo 3: Termos
-  if (step === 3) {
-    return (
-      <div className="max-w-2xl mx-auto bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl">
-        <h2 className="text-2xl font-bold text-white mb-6 text-center">Termos e Isenções</h2>
-        <div className="space-y-4 text-slate-400 text-sm max-h-60 overflow-y-auto pr-2 mb-8 custom-scrollbar">
-          <p>• O diagnóstico é baseado na legislação ambiental federal ampla.</p>
-          <p>• Não guardamos os resultados desta avaliação após o envio do relatório final.</p>
-          <p>• A finalidade deste questionário é fornecer uma avaliação prévia para auxiliar na gestão do seu negócio.</p>
-          <p>• O relatório não contempla orientações técnicas, consultoria, auditoria ou projetos para sanar eventuais não conformidades.</p>
-        </div>
-        <button 
-          onClick={handleAgreeAndStart}
           disabled={isSubmitting}
           className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl transition-all flex justify-center items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              A processar e a preparar ambiente...
+              A preparar ambiente...
             </>
           ) : (
-            'Li e estou ciente'
+            'Avançar'
           )}
         </button>
-      </div>
+      </form>
     );
   }
 
-  // Passo 4: Tela de Sucesso
+  // Passo 3: Tela de Sucesso (Antigo passo 4)
   return (
     <div className="max-w-2xl mx-auto bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-center">
       <div className="bg-emerald-500/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
         <Mail className="text-emerald-500 w-10 h-10" />
       </div>
+      
       <h2 className="text-3xl font-bold text-white mb-4">Link Enviado com Sucesso!</h2>
+      
       <p className="text-slate-400 text-lg mb-8">
         Enviámos um link de acesso seguro e único para o e-mail <strong className="text-white">{formData.email}</strong>.
       </p>
-      <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 mb-8 inline-block text-left">
+
+      {/* AVISO IMPORTANTE SOLICITADO PELA YUDI */}
+      <div className="bg-amber-500/10 border border-amber-500/30 p-6 rounded-xl mb-8 flex flex-col items-center">
+        <AlertTriangle className="text-amber-500 w-8 h-8 mb-3" />
+        <h3 className="text-amber-500 font-bold text-lg mb-2">ATENÇÃO</h3>
+        <p className="text-amber-200/80 font-medium">
+          O LINK DO QUESTIONÁRIO EXPIRA EM 7 DIAS.<br/> 
+          Inicie o preenchimento dentro desse prazo.
+        </p>
+      </div>
+
+      <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 inline-block text-left">
         <p className="text-sm text-slate-400 flex items-center gap-2">
           <span className="text-emerald-500">✔</span> Verifique a sua caixa de entrada.
         </p>
@@ -205,9 +194,6 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
           <span className="text-emerald-500">✔</span> Verifique também a pasta de Spam/Lixo Eletrónico.
         </p>
       </div>
-      <p className="text-xs text-slate-500">
-        Por questões de segurança, este link é válido por 7 dias. Pode fechar esta página com segurança.
-      </p>
     </div>
   );
 }

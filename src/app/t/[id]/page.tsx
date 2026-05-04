@@ -23,13 +23,13 @@ interface SessionData {
 }
 
 // ============================================================================
-// COMPONENTE 1: TELA DE BOAS VINDAS E INSTRUÇÕES
+// COMPONENTE 1: TELA DE BOAS VINDAS E INSTRUÇÕES (PÓS-LINK)
 // ============================================================================
 function WelcomeInstructions({ sessionData, onStart }: { sessionData: SessionData; onStart: () => void }) {
   const [agreed, setAgreed] = useState(false);
 
   return (
-    <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 shadow-xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 duration-500">
+    <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 shadow-xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 duration-500">
       
       {/* Banner de Boas-Vindas */}
       <div className="bg-emerald-600 p-8 text-white text-center">
@@ -37,16 +37,26 @@ function WelcomeInstructions({ sessionData, onStart }: { sessionData: SessionDat
           <ClipboardCheck className="w-8 h-8" />
         </div>
         <h1 className="text-2xl font-bold">Avaliação de Conformidade Ambiental</h1>
-        <p className="text-emerald-100 mt-2">Olá, {sessionData?.client_name}. O seu ambiente seguro está pronto.</p>
+        <p className="text-emerald-100 mt-2">Questionário de avaliação de conformidade ambiental.</p>
       </div>
 
       <div className="p-8 space-y-8">
         
-        {/* Seção de Regras */}
+        <section className="text-center">
+           <p className="text-lg text-slate-700 dark:text-slate-300">
+             Olá, <strong>{sessionData?.client_name}</strong>. O seu ambiente seguro está pronto.
+             <br/><br/>
+             Este serviço foi pensado para realizar um diagnóstico de conformidade legal ambiental com base na legislação vigente brasileira.
+           </p>
+        </section>
+
+        <hr className="border-slate-200 dark:border-slate-800" />
+
+        {/* Seção de Regras e Termos */}
         <section className="space-y-4">
           <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2">
             <AlertCircle className="w-5 h-5 text-emerald-500" />
-            Instruções de Preenchimento
+            Termos de Uso e Instruções
           </h2>
           
           <div className="grid gap-4">
@@ -60,23 +70,23 @@ function WelcomeInstructions({ sessionData, onStart }: { sessionData: SessionDat
             <div className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
               <CheckCircle2 className="w-5 h-5 text-slate-400 shrink-0" />
               <p className="text-sm text-slate-600 dark:text-slate-300">
-                <strong>Acesso Único:</strong> O formulário só pode ser finalizado uma vez. Após a emissão do relatório, o link será permanentemente desativado.
+                <strong>Acesso Único:</strong> O formulário só pode ser finalizado uma vez. Após a emissão do resumo, o link será permanentemente desativado.
               </p>
             </div>
 
             <div className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
               <AlertCircle className="w-5 h-5 text-slate-400 shrink-0" />
               <p className="text-sm text-slate-600 dark:text-slate-300">
-                <strong>Continuidade:</strong> Caso a página seja fechada, você poderá reiniciar o preenchimento pelo link do e-mail, desde que não tenha finalizado a avaliação.
+                <strong>Continuidade:</strong> Caso a página seja fechada, você poderá reiniciar o preenchimento pelo link do e-mail, de onde parou, desde que não tenha finalizado a avaliação.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Orientações Adicionais */}
+        {/* Orientações Adicionais e Aviso Final */}
         <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-400 p-4">
           <p className="text-sm text-amber-800 dark:text-amber-200">
-            <strong>Importante:</strong> Responda a todas as questões utilizando as opções disponíveis. O relatório final será gerado automaticamente com base nestas respostas.
+            <strong>Aviso:</strong> Ao concluir o formulário será gerado um resumo da avaliação que pode ser impresso e também será enviado para o e-mail informado. Após a conclusão da avaliação o formulário será bloqueado.
           </p>
         </div>
 
@@ -88,24 +98,26 @@ function WelcomeInstructions({ sessionData, onStart }: { sessionData: SessionDat
             onChange={(e) => setAgreed(e.target.checked)}
             className="w-5 h-5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
           />
-          <span className="text-sm text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
+          <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
             Compreendo as regras e desejo iniciar o questionário agora.
           </span>
         </label>
 
         {/* Botão de Início */}
-        <button
-          onClick={onStart}
-          disabled={!agreed}
-          className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${
-            agreed 
-            ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-emerald-500/20' 
-            : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-          }`}
-        >
-          Acessar o Questionário
-          <ArrowRight className="w-5 h-5" />
-        </button>
+        <div className="flex justify-center">
+          <button
+            onClick={onStart}
+            disabled={!agreed}
+            className={`w-auto px-12 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${
+              agreed 
+              ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-emerald-500/20' 
+              : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
+            }`}
+          >
+            AVANÇAR
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -123,7 +135,6 @@ export default function SessionPage() {
   const [error, setError] = useState<string | null>(null);
   const [diagnosis, setDiagnosis] = useState<FinalDiagnosis | null>(null);
   
-  // NOVO ESTADO: Controla se o usuário já passou da tela de instruções
   const [hasStarted, setHasStarted] = useState(false);
 
   useEffect(() => {
@@ -144,7 +155,6 @@ export default function SessionPage() {
           return;
         }
 
-        // Verifica se a sessão expirou
         if (new Date(data.expires_at) < new Date()) {
           setError("Este link expirou. Por favor, solicite um novo acesso.");
           return;
@@ -152,10 +162,8 @@ export default function SessionPage() {
 
         setSession(data);
 
-        // Se a sessão já estiver concluída, carrega o diagnóstico
         if (data.status === 'completed' && data.diagnosis_data) {
           setDiagnosis(data.diagnosis_data);
-          // Se já terminou, passa direto pelas instruções
           setHasStarted(true); 
         }
 
@@ -173,14 +181,12 @@ export default function SessionPage() {
   const handleComplete = async (answers: Record<string, string>) => {
     try {
       setLoading(true);
-      // CORREÇÃO 1: Usando "as any" no DiagnosisService para ignorar o nome exato do método
       const result = (DiagnosisService as any).calculate 
         ? (DiagnosisService as any).calculate(questionsData as any, answers)
         : (DiagnosisService as any).generateDiagnosis(questionsData as any, answers);
       
       setDiagnosis(result);
 
-     // Salva no banco e muda o status
       await supabase
         .from('sessions')
         .update({ 
@@ -189,13 +195,11 @@ export default function SessionPage() {
         })
         .eq('id', sessionId);
         
-      // A CORREÇÃO: Avisa a tela que acabou!
       setSession(prev => prev ? { ...prev, status: 'completed' } : null);
-        
         
     } catch (err) {
       console.error(err);
-      alert("Ocorreu um erro ao salvar o relatório. Tente novamente.");
+      alert("Ocorreu um erro ao salvar o resumo. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -227,7 +231,6 @@ export default function SessionPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col transition-colors duration-300">
       
-      {/* HEADER FIXO DO AMBIENTE SEGURO */}
       <header className="bg-emerald-800 dark:bg-emerald-950 text-white shadow-md px-6 py-4 flex items-center justify-between no-print">
         <div className="flex items-center gap-3">
           <div className="bg-white/10 p-2 rounded-full">
@@ -240,10 +243,8 @@ export default function SessionPage() {
         </div>
       </header>
 
-      {/* ÁREA CENTRAL */}
       <main className="flex-1 p-4 sm:p-8">
         
-        {/* SE NÃO COMEÇOU E NÃO ESTÁ COMPLETO: Mostra Instruções */}
         {!hasStarted && session.status === 'pending' && (
           <WelcomeInstructions 
             sessionData={session} 
@@ -251,7 +252,6 @@ export default function SessionPage() {
           />
         )}
 
-        {/* SE JÁ COMEÇOU E ESTÁ PENDENTE: Mostra as Perguntas */}
         {hasStarted && session.status === 'pending' && (
           <div className="max-w-4xl mx-auto animate-in fade-in zoom-in-95 duration-500">
              <Questionnaire 
@@ -261,17 +261,15 @@ export default function SessionPage() {
           </div>
         )}
 
-        {/* SE ESTIVER CONCLUÍDO: Mostra o Relatório */}
         {diagnosis && session.status === 'completed' && (
           <div className="max-w-4xl mx-auto animate-in slide-in-from-bottom-8 duration-700">
             <div id="area-relatorio" className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
               
               <div className="p-8 border-b border-slate-100 dark:border-slate-800">
                 <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-                  Relatório de Avaliação Ambiental
+                  Resumo da Avaliação Ambiental
                 </h2>
                 
-                {/* INFORMAÇÕES DO CLIENTE (Com a nova linha da Data!) */}
                 <div className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl space-y-3">
                   <p className="text-slate-600 dark:text-slate-300"><strong className="text-slate-800 dark:text-slate-100">Empresa/Cliente:</strong> {session.client_name}</p>
                   <p className="text-slate-600 dark:text-slate-300"><strong className="text-slate-800 dark:text-slate-100">Documento (CPF/CNPJ):</strong> {session.client_document}</p>
@@ -279,12 +277,10 @@ export default function SessionPage() {
                 </div>
               </div>
 
-              {/* RESTANTE DO SEU RELATÓRIO (Gráficos e Alertas) */}
               <div className="p-8">
                 <div className="mb-12">
                   <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-6">Índice Geral de Conformidade</h3>
                   <div className="flex justify-center">
-                    {/* CORREÇÃO 2: Passando a propriedade inteira via spread operator e bypass as any */}
                     <ComplianceChart data={(diagnosis as any).scores} />
                   </div>
                 </div>
@@ -292,7 +288,6 @@ export default function SessionPage() {
                 <div>
                   <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-6">Análise por Dimensão</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* CORREÇÃO 3: Usando as any para garantir que a propriedade existe ou tentar mapear com nomes comuns */}
                     {((diagnosis as any).topicScores || (diagnosis as any).categories || []).map((score: any, index: number) => (
                       <div key={index} className="flex justify-between items-center p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700">
                         <span className="font-semibold text-slate-700 dark:text-slate-200">{score.topic || score.name}</span>
@@ -325,7 +320,6 @@ export default function SessionPage() {
             </div>
             
             <div className="flex justify-center mt-6 no-print">
-              {/* CORREÇÃO 4: O botão ExportPDF não recebia filename, removi isso e corrigi o erro de sintaxe */}
               <ExportPDFButton elementId="area-relatorio" />
             </div>
           </div>
