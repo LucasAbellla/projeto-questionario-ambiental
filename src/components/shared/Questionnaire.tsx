@@ -38,14 +38,13 @@ export function Questionnaire({ questions, onComplete }: QuestionnaireProps) {
       setAnswers(newAnswers);
   
       if (nextId === 'FIM') {
-        // Ativa a tela de revisão
         setIsReviewing(true);
       } else {
-        // Guarda a pergunta atual no histórico antes de ir para a próxima
         setHistory([...history, currentQuestionId]);
         setCurrentQuestionId(nextId);
-        // Limpa a seleção para a próxima tela
-        setCurrentSelection(null); 
+        
+        // CORREÇÃO: Em vez de limpar (null), procura se já há uma resposta gravada para a próxima pergunta!
+        setCurrentSelection(newAnswers[nextId] || null); 
       }
   };
 
@@ -53,20 +52,20 @@ export function Questionnaire({ questions, onComplete }: QuestionnaireProps) {
   const handleGoBack = () => {
     if (history.length === 0) return; 
     
-    // Tira o último ID do histórico e volta para ele
     const newHistory = [...history];
     const previousQuestionId = newHistory.pop();
     
     if (previousQuestionId) {
       setHistory(newHistory);
       setCurrentQuestionId(previousQuestionId);
-      // Limpa a seleção ao voltar para o utilizador escolher de novo
-      setCurrentSelection(null); 
+      
+      // CORREÇÃO: Puxa a resposta que o utilizador já tinha dado anteriormente
+      setCurrentSelection(answers[previousQuestionId] || null); 
     }
   };
 
   // ============================================================================
-  // TELA DE REVISÃO FINAL (Intercepta o fim do questionário)
+  // TELA DE REVISÃO FINAL
   // ============================================================================
   if (isReviewing) {
     return (
@@ -107,7 +106,6 @@ export function Questionnaire({ questions, onComplete }: QuestionnaireProps) {
     );
   }
 
-  // REDE DE SEGURANÇA (Se a pergunta falhar)
   if (!currentQuestion) {
     return (
       <div className="bg-red-950/30 p-8 rounded-2xl border border-red-900 text-center max-w-2xl mx-auto mt-8">
@@ -128,7 +126,6 @@ export function Questionnaire({ questions, onComplete }: QuestionnaireProps) {
   return (
     <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 max-w-2xl mx-auto w-full transition-all duration-300">
       
-      {/* HEADER DO CARD: Mostra apenas o Tópico (O botão voltar desceu para o rodapé) */}
       <div className="mb-6">
         <span className="inline-block bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           {currentQuestion.topic}
@@ -147,7 +144,7 @@ export function Questionnaire({ questions, onComplete }: QuestionnaireProps) {
               onClick={() => setCurrentSelection('Sim')}
               className={`py-4 px-6 rounded-xl border-2 font-medium transition-all duration-200 active:scale-95 ${
                   currentSelection === 'Sim' 
-                  ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
+                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'
                   : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-600'
               }`}
             >
@@ -157,7 +154,7 @@ export function Questionnaire({ questions, onComplete }: QuestionnaireProps) {
               onClick={() => setCurrentSelection('Não')}
               className={`py-4 px-6 rounded-xl border-2 font-medium transition-all duration-200 active:scale-95 ${
                   currentSelection === 'Não' 
-                  ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
+                  ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'
                   : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-600'
               }`}
             >
@@ -172,7 +169,7 @@ export function Questionnaire({ questions, onComplete }: QuestionnaireProps) {
                 onClick={() => setCurrentSelection(option.text)}
                 className={`w-full text-left py-4 px-6 rounded-xl border-2 font-medium transition-all duration-200 flex items-center justify-between group active:scale-[0.98] ${
                     currentSelection === option.text
-                    ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
+                    ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'
                     : 'border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:hover:border-slate-600'
                 }`}
               >

@@ -23,15 +23,16 @@ interface SessionData {
 }
 
 // ============================================================================
-// COMPONENTE 1: TELA DE BOAS VINDAS E INSTRUÇÕES (PÓS-LINK)
+// COMPONENTE 1: TELA DE BOAS VINDAS E INSTRUÇÕES (PÓS-LINK) EM 2 PASSOS
 // ============================================================================
 function WelcomeInstructions({ sessionData, onStart }: { sessionData: SessionData; onStart: () => void }) {
+  const [step, setStep] = useState(1);
   const [agreed, setAgreed] = useState(false);
 
   return (
     <div className="max-w-3xl mx-auto bg-white dark:bg-slate-900 shadow-xl rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 duration-500">
       
-      {/* Banner de Boas-Vindas */}
+      {/* Banner de Boas-Vindas (Fixo para as duas telas) */}
       <div className="bg-emerald-600 p-8 text-white text-center">
         <div className="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
           <ClipboardCheck className="w-8 h-8" />
@@ -42,82 +43,125 @@ function WelcomeInstructions({ sessionData, onStart }: { sessionData: SessionDat
 
       <div className="p-8 space-y-8">
         
-        <section className="text-center">
-           <p className="text-lg text-slate-700 dark:text-slate-300">
-             Olá, <strong>{sessionData?.client_name}</strong>. O seu ambiente seguro está pronto.
-             <br/><br/>
-             Este serviço foi pensado para realizar um diagnóstico de conformidade legal ambiental com base na legislação vigente brasileira.
-           </p>
-        </section>
+        {step === 1 ? (
+          // ================= PASSO 1: APENAS INSTRUÇÕES =================
+          <div className="animate-in fade-in duration-300 space-y-8">
+            <section className="text-center">
+               <p className="text-lg text-slate-700 dark:text-slate-300">
+                 Olá, <strong>{sessionData?.client_name}</strong>. O seu ambiente seguro está pronto.
+                 <br/><br/>
+                 Este serviço foi pensado para realizar um diagnóstico de conformidade legal ambiental com base na legislação vigente brasileira.
+               </p>
+            </section>
 
-        <hr className="border-slate-200 dark:border-slate-800" />
+            <hr className="border-slate-200 dark:border-slate-800" />
 
-        {/* Seção de Regras e Termos */}
-        <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-            <AlertCircle className="w-5 h-5 text-emerald-500" />
-            Termos de Uso e Instruções
-          </h2>
-          
-          <div className="grid gap-4">
-            <div className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
-              <Clock className="w-5 h-5 text-slate-400 shrink-0" />
-              <p className="text-sm text-slate-600 dark:text-slate-300">
-                <strong>Duração do Link:</strong> Este acesso é válido por 7 dias. Após este prazo, será necessário solicitar um novo link.
-              </p>
-            </div>
+            <section className="space-y-4">
+              <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                <AlertCircle className="w-5 h-5 text-emerald-500" />
+                Instruções de Preenchimento
+              </h2>
+              
+              <div className="grid gap-4">
+                <div className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
+                  <Clock className="w-5 h-5 text-slate-400 shrink-0" />
+                  <p className="text-sm text-slate-600 dark:text-slate-300">
+                    <strong>Duração do Link:</strong> Este acesso é válido por 7 dias. Após este prazo, será necessário solicitar um novo link.
+                  </p>
+                </div>
 
-            <div className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
-              <CheckCircle2 className="w-5 h-5 text-slate-400 shrink-0" />
-              <p className="text-sm text-slate-600 dark:text-slate-300">
-                <strong>Acesso Único:</strong> O formulário só pode ser finalizado uma vez. Após a emissão do resumo, o link será permanentemente desativado.
-              </p>
-            </div>
+                <div className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
+                  <CheckCircle2 className="w-5 h-5 text-slate-400 shrink-0" />
+                  <p className="text-sm text-slate-600 dark:text-slate-300">
+                    <strong>Acesso Único:</strong> O formulário só pode ser finalizado uma vez. Após a emissão do resumo, o link será permanentemente desativado.
+                  </p>
+                </div>
 
-            <div className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
-              <AlertCircle className="w-5 h-5 text-slate-400 shrink-0" />
-              <p className="text-sm text-slate-600 dark:text-slate-300">
-                <strong>Continuidade:</strong> Caso a página seja fechada, você poderá reiniciar o preenchimento pelo link do e-mail, de onde parou, desde que não tenha finalizado a avaliação.
-              </p>
+                <div className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
+                  <AlertCircle className="w-5 h-5 text-slate-400 shrink-0" />
+                  <p className="text-sm text-slate-600 dark:text-slate-300">
+                    <strong>Continuidade:</strong> Caso a página seja fechada, você poderá reiniciar o preenchimento pelo link do e-mail, de onde parou, desde que não tenha finalizado a avaliação.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <div className="flex justify-center">
+              <button
+                onClick={() => setStep(2)}
+                className="w-auto px-12 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-emerald-500/20"
+              >
+                AVANÇAR
+                <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
-        </section>
+        ) : (
+          // ================= PASSO 2: TERMOS E ISENÇÕES =================
+          <div className="animate-in fade-in slide-in-from-right-4 duration-300 space-y-8">
+            <section className="text-center">
+               <p className="text-lg text-slate-700 dark:text-slate-300">
+                 Antes de iniciarmos, por favor leia atentamente os termos e isenções relativos a esta avaliação.
+               </p>
+            </section>
 
-        {/* Orientações Adicionais e Aviso Final */}
-        <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-400 p-4">
-          <p className="text-sm text-amber-800 dark:text-amber-200">
-            <strong>Aviso:</strong> Ao concluir o formulário será gerado um resumo da avaliação que pode ser impresso e também será enviado para o e-mail informado. Após a conclusão da avaliação o formulário será bloqueado.
-          </p>
-        </div>
+            <hr className="border-slate-200 dark:border-slate-800" />
 
-        {/* Checkbox de Ciência */}
-        <label className="flex items-center gap-3 cursor-pointer group">
-          <input 
-            type="checkbox" 
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className="w-5 h-5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
-          />
-          <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
-            Compreendo as regras e desejo iniciar o questionário agora.
-          </span>
-        </label>
+            <section className="space-y-4">
+              <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 flex items-center gap-2">
+                <AlertCircle className="w-5 h-5 text-emerald-500" />
+                Termos de Uso e Isenções
+              </h2>
+              
+              <div className="space-y-4 text-slate-600 dark:text-slate-300 text-sm p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
+                <p>• O diagnóstico é baseado na legislação ambiental federal ampla.</p>
+                <p>• Não guardamos os resultados desta avaliação após o envio do resumo final.</p>
+                <p>• A finalidade deste questionário é fornecer uma avaliação prévia para auxiliar na gestão do seu negócio.</p>
+                <p>• O resumo não contempla orientações técnicas, consultoria, auditoria ou projetos para sanar eventuais não conformidades.</p>
+              </div>
+            </section>
 
-        {/* Botão de Início */}
-        <div className="flex justify-center">
-          <button
-            onClick={onStart}
-            disabled={!agreed}
-            className={`w-auto px-12 py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${
-              agreed 
-              ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-emerald-500/20' 
-              : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-            }`}
-          >
-            AVANÇAR
-            <ArrowRight className="w-5 h-5" />
-          </button>
-        </div>
+            <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-400 p-4">
+              <p className="text-sm text-amber-800 dark:text-amber-200">
+                <strong>Aviso:</strong> Ao concluir o formulário será gerado um resumo da avaliação que pode ser impresso e também será enviado para o e-mail informado. Após a conclusão da avaliação o formulário será bloqueado.
+              </p>
+            </div>
+
+            <label className="flex items-center gap-3 cursor-pointer group">
+              <input 
+                type="checkbox" 
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="w-5 h-5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+              />
+              <span className="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-slate-200 transition-colors">
+                Compreendo as regras e desejo iniciar o questionário agora.
+              </span>
+            </label>
+
+            <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-100 dark:border-slate-800">
+              <button
+                onClick={() => setStep(1)}
+                className="px-6 py-3 rounded-xl font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white transition-colors"
+              >
+                ← Voltar
+              </button>
+              
+              <button
+                onClick={onStart}
+                disabled={!agreed}
+                className={`w-auto px-8 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${
+                  agreed 
+                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg hover:shadow-emerald-500/20' 
+                  : 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
+                }`}
+              >
+                COMEÇAR QUESTIONÁRIO
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

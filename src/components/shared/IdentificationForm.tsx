@@ -97,7 +97,11 @@ export default function IdentificationForm({ onComplete }: IdentificationFormPro
                 className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 pl-12 pr-4 text-white focus:border-emerald-500 outline-none transition-all"
                 placeholder="Ex: João Silva ou Empresa Verde LTDA"
                 value={formData.name || ''}
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                // AQUI ESTÁ A CORREÇÃO QUE CORTA OS NÚMEROS:
+                onChange={(e) => {
+                  const apenasLetras = e.target.value.replace(/\d/g, '');
+                  setFormData({...formData, name: apenasLetras});
+                }}
               />
             </div>
           </div>
